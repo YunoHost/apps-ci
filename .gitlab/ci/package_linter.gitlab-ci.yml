@@ -23,7 +23,7 @@ package linter:
             then
                 RESULT_linter_level_4=1
             fi
-            if ! cat "temp_linter_result.json" | jq ".warning" | grep -q "app_in_github_org"
+            if ! cat "temp_linter_result.json" | jq ".warning" | grep -q "is_in_github_org"
             then
                 RESULT_linter_level_6=1
             fi
