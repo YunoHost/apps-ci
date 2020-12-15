@@ -1,0 +1,2 @@
+# Upgrade all continers
+30 2 * * * root /bin/bash -c "/opt/apps-ci/auto_upgrade_container.sh >> /opt/apps-ci/upgrade.log 2>>/opt/apps-ci/upgrade-error.log"
