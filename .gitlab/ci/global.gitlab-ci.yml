@@ -1,0 +1,14 @@
+variables:
+  TEST_RESULTS: ynh-test
+
+default:
+  tags:
+    - apps-ci
+  # All jobs are interruptible by default
+  interruptible: true
+  cache:
+    # Share cache between all jobs in the same pipeline
+    key: ${CI_COMMIT_REF_SLUG}
+    when: always
+    paths:
+      - $TEST_RESULTS

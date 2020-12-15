@@ -1,0 +1,17 @@
+#.install_app: &install_app
+#    - yunohost app install $args
+.test: &test |
+    function test()
+    {
+        echo $1
+    }
+
+install sub path:
+    stage: install
+    before_script:
+        - *test
+    script:
+#        - args="domain=domain.tld&path=/path&admin=USER&password=pass&language=fr&market=1&is_public=1&""
+#        - *install_app
+        - test "lol"
+    when: always

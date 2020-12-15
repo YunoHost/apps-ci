@@ -1,0 +1,21 @@
+stages:
+  - package_linter
+  - install
+  - upgrade
+  - backup_restore
+  - multi_instance
+  - change_url
+  - result
+
+include:
+  - 'https://raw.githubusercontent.com/YunoHost/apps-ci/master/.gitlab/ci/global.gitlab-ci.yml'
+  - 'https://raw.githubusercontent.com/YunoHost/apps-ci/master/.gitlab/ci/package_linter.gitlab-ci.yml'
+  - 'https://raw.githubusercontent.com/YunoHost/apps-ci/master/.gitlab/ci/install.gitlab-ci.yml'
+  #- 'https://raw.githubusercontent.com/YunoHost/apps-ci/master/.gitlab/ci/install_sub_dir.gitlab-ci.yml'
+  #- 'https://raw.githubusercontent.com/YunoHost/apps-ci/master/.gitlab/ci/install_root.gitlab-ci.yml'
+  #- 'https://raw.githubusercontent.com/YunoHost/apps-ci/master/.gitlab/ci/install_no_url.gitlab-ci.yml'
+  #- 'https://raw.githubusercontent.com/YunoHost/apps-ci/master/.gitlab/ci/upgrade.gitlab-ci.yml'
+  #- 'https://raw.githubusercontent.com/YunoHost/apps-ci/master/.gitlab/ci/backup_restore.gitlab-ci.yml'
+  #- 'https://raw.githubusercontent.com/YunoHost/apps-ci/master/.gitlab/ci/multi_instance.gitlab-ci.yml'
+  #- 'https://raw.githubusercontent.com/YunoHost/apps-ci/master/.gitlab/ci/change_url.gitlab-ci.yml'
+  #- 'https://raw.githubusercontent.com/YunoHost/apps-ci/master/.gitlab/ci/result.gitlab-ci.yml'

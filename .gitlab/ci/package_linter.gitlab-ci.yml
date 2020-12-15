@@ -1,0 +1,42 @@
+package linter:
+    stage: package_linter
+    variables:
+        PACKAGE_LINTER_RESULT: package_linter_result
+        RESULT_linter_level_0: 0
+        RESULT_linter_level_4: 0
+        RESULT_linter_level_6: 0
+        RESULT_linter_level_7: 0
+        RESULT_linter_level_8: 0
+    before_script:
+        - mkdir -p $TEST_RESULTS
+        - git clone https://github.com/YunoHost/package_linter
+    script:
+        - ./package_linter/package_linter.py ../$CI_PROJECT_NAME
+    after_script:
+        - |
+            ./package_linter/package_linter.py ./ --json > "temp_linter_result.json" || true
+            if ! cat "temp_linter_result.json" | jq ".critical" | grep -q -v "\[\]"
+            then
+                RESULT_linter_level_0=1
+            fi
+            if ! cat "temp_linter_result.json" | jq ".error" | grep -q -v "\[\]"
+            then
+                RESULT_linter_level_4=1
+            fi
+            if ! cat "temp_linter_result.json" | jq ".warning" | grep -q "app_in_github_org"
+            then
+                RESULT_linter_level_6=1
+            fi
+            if cat "temp_linter_result.json" | jq ".success" | grep -q "qualify_for_level_7"
+            then
+                RESULT_linter_level_7=1
+            fi
+            if cat "temp_linter_result.json" | jq ".success" | grep -q "qualify_for_level_8"
+            then
+                RESULT_linter_level_8=1
+            fi
+            echo "RESULT_linter_level_0" $RESULT_linter_level_0 > $TEST_RESULTS/$PACKAGE_LINTER_RESULT
+            echo "RESULT_linter_level_4" $RESULT_linter_level_4 >> $TEST_RESULTS/$PACKAGE_LINTER_RESULT
+            echo "RESULT_linter_level_6" $RESULT_linter_level_6 >> $TEST_RESULTS/$PACKAGE_LINTER_RESULT
+            echo "RESULT_linter_level_7" $RESULT_linter_level_7 >> $TEST_RESULTS/$PACKAGE_LINTER_RESULT
+            echo "RESULT_linter_level_8" $RESULT_linter_level_8 >> $TEST_RESULTS/$PACKAGE_LINTER_RESULT
